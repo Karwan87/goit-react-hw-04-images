@@ -22,16 +22,6 @@ const Modal = ({ imageUrl, onClose, onPrev, onNext, index }) => {
     };
   }, [onClose, onPrev, onNext]);
 
-  // const handlePrevClick = event => {
-  //   event.stopPropagation();
-  //   onPrev();
-  // };
-
-  // const handleNextClick = event => {
-  //   event.stopPropagation();
-  //   onNext();
-  // };
-
   const handlePrevClick = (event, index) => {
     if (event.target === event.currentTarget) {
       onPrev(index);
@@ -49,32 +39,6 @@ const Modal = ({ imageUrl, onClose, onPrev, onNext, index }) => {
       onClose();
     }
   };
-
-  //   return (
-  //     <div className={styles.overlay} onClick={handleClick}>
-  //       <div className={styles.modal}>
-  //         <button className={styles.closeButton} onClick={onClose}>
-  //           <BiX size={30} />
-  //         </button>
-  //         <img src={imageUrl} alt="" className={styles.image} />
-  //         <div className={styles.navigator}>
-  //           <button
-  //             className={styles.prevButton}
-  //             onClick={event => handlePrevClick(event, index)}
-  //           >
-  //             <BiChevronLeft size={30} />
-  //           </button>
-  //           <button
-  //             className={styles.nextButton}
-  //             onClick={event => handleNextClick(event, index)}
-  //           >
-  //             <BiChevronRight size={30} />
-  //           </button>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
 
   return (
     <div className={styles.overlay} onClick={handleClick}>
