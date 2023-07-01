@@ -10,7 +10,8 @@ const ImageGallery = ({ images, onItemClick }) => {
         {images.map((image, index) => (
           <ImageGalleryItem
             key={image.id}
-            image={{ ...image, selectedIndex: index }}
+            image={image}
+            index={index}
             onItemClick={onItemClick}
           />
         ))}
@@ -24,6 +25,7 @@ ImageGallery.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
     })
   ).isRequired,
   onItemClick: PropTypes.func.isRequired,

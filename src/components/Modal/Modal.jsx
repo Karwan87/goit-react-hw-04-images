@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { BiX, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import styles from './Modal.module.css';
 
-const Modal = ({ imageUrl, onClose, onPrev, onNext }) => {
+const Modal = ({ imageUrl, onClose, onPrev, onNext, index }) => {
   useEffect(() => {
     const handleKeyDown = event => {
       if (event.code === 'Escape') {
@@ -22,14 +22,26 @@ const Modal = ({ imageUrl, onClose, onPrev, onNext }) => {
     };
   }, [onClose, onPrev, onNext]);
 
-  const handlePrevClick = event => {
-    event.stopPropagation();
-    onPrev();
+  // const handlePrevClick = event => {
+  //   event.stopPropagation();
+  //   onPrev();
+  // };
+
+  // const handleNextClick = event => {
+  //   event.stopPropagation();
+  //   onNext();
+  // };
+
+  const handlePrevClick = (event, index) => {
+    if (event.target === event.currentTarget) {
+      onPrev(index);
+    }
   };
 
-  const handleNextClick = event => {
-    event.stopPropagation();
-    onNext();
+  const handleNextClick = (event, index) => {
+    if (event.target === event.currentTarget) {
+      onNext(index);
+    }
   };
 
   const handleClick = event => {
@@ -37,6 +49,32 @@ const Modal = ({ imageUrl, onClose, onPrev, onNext }) => {
       onClose();
     }
   };
+
+  //   return (
+  //     <div className={styles.overlay} onClick={handleClick}>
+  //       <div className={styles.modal}>
+  //         <button className={styles.closeButton} onClick={onClose}>
+  //           <BiX size={30} />
+  //         </button>
+  //         <img src={imageUrl} alt="" className={styles.image} />
+  //         <div className={styles.navigator}>
+  //           <button
+  //             className={styles.prevButton}
+  //             onClick={event => handlePrevClick(event, index)}
+  //           >
+  //             <BiChevronLeft size={30} />
+  //           </button>
+  //           <button
+  //             className={styles.nextButton}
+  //             onClick={event => handleNextClick(event, index)}
+  //           >
+  //             <BiChevronRight size={30} />
+  //           </button>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className={styles.overlay} onClick={handleClick}>
@@ -46,12 +84,22 @@ const Modal = ({ imageUrl, onClose, onPrev, onNext }) => {
         </button>
         <img src={imageUrl} alt="" className={styles.image} />
         <div className={styles.navigator}>
-          <button className={styles.prevButton} onClick={handlePrevClick}>
-            <BiChevronLeft size={30} />
-          </button>
-          <button className={styles.nextButton} onClick={handleNextClick}>
-            <BiChevronRight size={30} />
-          </button>
+          <div className={styles.prevButtonContainer}>
+            <button
+              className={styles.prevButton}
+              onClick={event => handlePrevClick(event, index)}
+            >
+              <BiChevronLeft size={30} />
+            </button>
+          </div>
+          <div className={styles.nextButtonContainer}>
+            <button
+              className={styles.nextButton}
+              onClick={event => handleNextClick(event, index)}
+            >
+              <BiChevronRight size={30} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

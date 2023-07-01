@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ image, onItemClick }) => {
+const ImageGalleryItem = ({ image, index, onItemClick }) => {
   const handleClick = () => {
-    onItemClick(image.largeImageURL);
+    onItemClick(image.largeImageURL, index);
   };
 
   return (
@@ -22,9 +22,9 @@ ImageGalleryItem.propTypes = {
   image: PropTypes.shape({
     webformatURL: PropTypes.string.isRequired,
     largeImageURL: PropTypes.string.isRequired,
-    selectedIndex: PropTypes.number.isRequired,
   }).isRequired,
   onItemClick: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default ImageGalleryItem;

@@ -11,9 +11,9 @@ class App extends Component {
     images: [],
     isLoading: false,
     currentPage: 1,
-    selectedImageUrl: null,
     isModalOpen: false,
-    selectedIndex: [],
+    selectedIndex: null,
+    selectedImageIndex: null,
   };
   API_KEY = '35038868-0cefdd0904fdf8a70a3b6f6a2';
 
@@ -60,30 +60,48 @@ class App extends Component {
     });
   };
 
+  // handlePrevImage = () => {
+  //   const { images, selectedImageUrl } = this.state;
+  //   const selectedIndex = images.findIndex(
+  //     image => image.webformatURL === selectedImageUrl
+  //   );
+  //   if (selectedIndex > 0) {
+  //     const prevImageUrl = images[selectedIndex - 1].webformatURL;
+  //     this.setState({ selectedImageUrl: prevImageUrl });
+  //   }
+  // };
+
+  // handleNextImage = () => {
+  //   const { images, selectedImageUrl } = this.state;
+  //   const selectedIndex = images.findIndex(
+  //     image => image.webformatURL === selectedImageUrl
+  //   );
+  //   if (selectedIndex < images.length - 1) {
+  //     const nextImageUrl = images[selectedIndex + 1].webformatURL;
+  //     this.setState({ selectedImageUrl: nextImageUrl });
+  //   }
+  // };
+
   handlePrevImage = () => {
-    const { images, selectedImageUrl } = this.state;
-    const selectedIndex = images.findIndex(
-      image => image.webformatURL === selectedImageUrl
-    );
-    if (selectedIndex > 0) {
-      const prevImageUrl = images[selectedIndex - 1].webformatURL;
-      this.setState({ selectedImageUrl: prevImageUrl });
+    const { selectedImageIndex } = this.state;
+    if (selectedImageIndex > 0) {
+      this.setState(prevState => ({
+        selectedImageIndex: prevState.selectedImageIndex - 1,
+      }));
     }
   };
 
   handleNextImage = () => {
-    const { images, selectedImageUrl } = this.state;
-    const selectedIndex = images.findIndex(
-      image => image.webformatURL === selectedImageUrl
-    );
-    if (selectedIndex < images.length - 1) {
-      const nextImageUrl = images[selectedIndex + 1].webformatURL;
-      this.setState({ selectedImageUrl: nextImageUrl });
+    const { images, selectedImageIndex } = this.state;
+    if (selectedImageIndex < images.length - 1) {
+      this.setState(prevState => ({
+        selectedImageIndex: prevState.selectedImageIndex + 1,
+      }));
     }
   };
 
   render() {
-    const { images, isLoading, selectedImageUrl, isModalOpen } = this.state;
+    const { images, isLoading, isModalOpen, selectedImageIndex } = this.state;
 
     return (
       <div>
@@ -95,11 +113,11 @@ class App extends Component {
         )}
         {isModalOpen && (
           <Modal
-            imageUrl={selectedImageUrl}
+            imageUrl={images[selectedImageIndex]?.webformatURL}
             onClose={() => this.setState({ isModalOpen: false })}
             onPrev={this.handlePrevImage}
             onNext={this.handleNextImage}
-            selectedImageIndex={this.state.selectedImageIndex}
+            selectedImageIndex={selectedImageIndex}
           />
         )}
       </div>
