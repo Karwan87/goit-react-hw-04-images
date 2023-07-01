@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .modal img {
@@ -26,36 +27,74 @@
   object-fit: contain;
 }
 
-.modal .close-button {
+.modal .closeButton {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  color: white;
-  font-size: 24px;
+  top: 0;
+  width: 46px;
+  height: 39px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .nextButton,
+.modal .prevButton {
+  position: absolute;
+  bottom: 0;
+  width: 46px;
+  height: 39px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }
 
-.closeButton {
+.modal .closeButton {
   background-color: antiquewhite;
-  display: flex;
-  position: absolute;
-  left: 1458px;
-  cursor: pointer;
+  right: 0;
 }
+
 .nextButton {
   background-color: antiquewhite;
-  display: flex;
-  position: absolute;
-  left: 51%;
-  cursor: pointer;
+  right: 10px;
 }
 .prevButton {
   background-color: antiquewhite;
-  display: flex;
-  position: absolute;
-  left: 47%;
-  cursor: pointer;
+  left: 10px;
 }
+.modal .closeButton:hover,
+.modal .nextButton:hover,
+.modal .prevButton:hover {
+  opacity: 0.7;
+  background: rgba(221, 225, 245, 0.836);
+  transition-duration: 350ms;
+}
+
+.image {
+  width: 100%;
+  max-height: calc(100vh - 200px);
+  object-fit: contain;
+}
+
+.prevButtonContainer,
+.nextButtonContainer {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.prevButtonContainer {
+  left: 0;
+}
+
+.nextButtonContainer {
+  right: 0;
+}
+
 .closeButton:hover {
   opacity: 0.7;
   background: rgba(221, 225, 245, 0.836);
@@ -71,8 +110,11 @@
   background: rgba(221, 225, 245, 0.836);
   transition-duration: 350ms;
 }
-.image {
-  width: 100%;
-  max-height: calc(100vh - 200px);
-  object-fit: contain;
+svg {
+  pointer-events: none;
+}
+
+.modal .prev-button,
+.modal .next-button {
+  pointer-events: auto;
 }
